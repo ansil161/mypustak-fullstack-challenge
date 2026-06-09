@@ -84,8 +84,8 @@ The frontend uses Vite and NPM.
 The application is deployed on Railway as two separate services (frontend and backend).
 
 ### Deployed Links
-* **Frontend:** [https://your-frontend-domain.up.railway.app](https://your-frontend-domain.up.railway.app)
-* **Backend:** [https://your-backend-domain.up.railway.app](https://your-backend-domain.up.railway.app)
+* **Frontend:** [https://comfortable-abundance-production-e08d.up.railway.app](https://comfortable-abundance-production-e08d.up.railway.app)
+* **Backend:** [https://mypustak-fullstack-challenge-copy-production.up.railway.app](https://mypustak-fullstack-challenge-copy-production.up.railway.app)
 
 ### Deployment Configurations
 
@@ -99,6 +99,6 @@ The application is deployed on Railway as two separate services (frontend and ba
 * **Build Command:** `npm run build`
 * **Start Command:** `npx serve -s dist -l $PORT`
 * **Environment Variables:**
-  * `VITE_API_URL`: The public URL of the deployed backend service (e.g. `https://your-backend-domain.up.railway.app`).
+  * `VITE_API_URL`: The public URL of the deployed backend service (`https://mypustak-fullstack-challenge-copy-production.up.railway.app`).
 
 *Note: The frontend code checks for the `VITE_API_URL` environment variable to connect to the production backend, and falls back to `http://localhost:8000` when running locally.*
