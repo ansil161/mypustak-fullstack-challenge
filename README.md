@@ -43,7 +43,7 @@ The frontend uses Vite and NPM.
 
 1. Navigate to the frontend directory:
    ```bash
-   cd frontend/frontend
+   cd frontend
    ```
 2. Install dependencies:
    ```bash
