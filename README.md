@@ -1,17 +1,19 @@
-# Post Management Application (MyPustak Challenge)
+# MyPustak Post Management Application
 
-This is a simple full-stack application for managing posts, built with FastAPI (Python) for the backend and React (Vite + JavaScript) for the frontend.
+A minimal, high-fidelity Post Management full-stack application built using FastAPI and React.js.
 
-## Project Structure
-- `backend/`: FastAPI server handling post creation, retrieval, and deletion in-memory.
-- `frontend/`: React single page app styled with Tailwind CSS.
+## Tech Stack
+* **Backend:** FastAPI (Python), Pydantic
+* **Frontend:** React.js (Vite, JavaScript), Vanilla CSS (Glassmorphism & Dark/Light adaptation)
 
 ---
 
-## Running Locally
+## Setup & Running Instructions
 
-### Backend Setup
-1. Move to the backend folder:
+### 1. Backend Server Setup
+The backend requires Python and standard dependencies. A preconfigured virtual environment is located in the `backend/env` directory.
+
+1. Navigate to the backend directory:
    ```bash
    cd backend
    ```
@@ -28,14 +30,18 @@ This is a simple full-stack application for managing posts, built with FastAPI (
      ```bash
      source env/bin/activate
      ```
-3. Run the FastAPI development server:
+3. Run the FastAPI server:
    ```bash
    uvicorn main:app --reload --host 127.0.0.1 --port 8000
    ```
-   The backend will run on `http://127.0.0.1:8000`.
+   *The backend will run at `http://127.0.0.1:8000`.*
 
-### Frontend Setup
-1. Move to the frontend folder:
+---
+
+### 2. Frontend React Setup
+The frontend uses Vite and NPM.
+
+1. Navigate to the frontend directory:
    ```bash
    cd frontend
    ```
@@ -43,42 +49,56 @@ This is a simple full-stack application for managing posts, built with FastAPI (
    ```bash
    npm install
    ```
-3. Run the Vite development server:
+3. Start the Vite development server:
    ```bash
    npm run dev -- --host 127.0.0.1 --port 5173
    ```
-   The app will run on `http://127.0.0.1:5173`.
+   *The frontend application will run at `http://127.0.0.1:5173`.*
 
 ---
 
-## API Endpoints
+## API Documentation
 
-- **GET `/posts`**: Returns all posts (latest first).
-- **POST `/posts`**: Creates a new post. Expects `title` (min 3 chars) and `body` (min 10 chars). Rejects whitespace-only inputs.
-- **DELETE `/posts/{id}`**: Deletes the post matching the specified ID.
+### Data Model
+```json
+{
+  "id": 1,
+  "title": "Hello World",
+  "body": "My first post"
+}
+```
+
+### Endpoints
+* **GET `/posts`**: Retrieves all posts in reverse order (newest first).
+  * *Response status code:* 200 OK
+* **POST `/posts`**: Publishes a new post. Checks that inputs are not empty or solely whitespace.
+  * *Payload:* `{"title": "string", "body": "string"}`
+  * *Response status code:* 201 Created
+* **DELETE `/posts/{id}`**: Deletes a post matching the specified ID.
+  * *Response status code:* 200 OK (or 404 Not Found if ID is invalid)
 
 ---
 
-## Deploying to Railway
+## Railway Deployment
 
-This project is set up to be deployed as two services under a single Railway project (one for the backend, one for the frontend).
+The application is deployed on Railway as two separate services (frontend and backend).
 
-### 1. Deploy the Backend
-1. Create a new project on Railway and connect this repository.
-2. Under the service settings, rename the service to `backend`.
-3. Set the **Root Directory** to `backend`.
-4. Set the **Start Command** to `uvicorn main:app --host 0.0.0.0 --port $PORT`.
-5. Under settings, generate a domain (e.g., `https://backend-production.up.railway.app`) and copy it.
+### Deployed Links
+* **Frontend:** [https://your-frontend-domain.up.railway.app](https://your-frontend-domain.up.railway.app)
+* **Backend:** [https://your-backend-domain.up.railway.app](https://your-backend-domain.up.railway.app)
 
-### 2. Deploy the Frontend
-1. Add a second service in your Railway project, connecting the same repo.
-2. Rename this service to `frontend`.
-3. Set the **Root Directory** to `frontend`.
-4. Set the **Build Command** to `npm run build`.
-5. Set the **Start Command** to `npx serve -s dist -l $PORT`.
-6. Add an environment variable to the frontend:
-   - Key: `VITE_API_URL`
-   - Value: `<YOUR_BACKEND_DOMAIN>` (the backend URL generated in step 1, e.g. `https://backend-production.up.railway.app`).
-7. Generate a domain for the frontend to access the application.
+### Deployment Configurations
 
-*Note: The frontend code checks for `VITE_API_URL`. If the environment variable isn't present, it falls back to `http://localhost:8000` for local development.*
+#### 1. Backend Service
+* **Root Directory:** `backend`
+* **Start Command:** `uvicorn main:app --host 0.0.0.0 --port $PORT`
+* Railway automatically handles the Python environment using Nixpacks (installs packages from `requirements.txt`).
+
+#### 2. Frontend Service
+* **Root Directory:** `frontend`
+* **Build Command:** `npm run build`
+* **Start Command:** `npx serve -s dist -l $PORT`
+* **Environment Variables:**
+  * `VITE_API_URL`: The public URL of the deployed backend service (e.g. `https://your-backend-domain.up.railway.app`).
+
+*Note: The frontend code checks for the `VITE_API_URL` environment variable to connect to the production backend, and falls back to `http://localhost:8000` when running locally.*
