@@ -16,7 +16,7 @@ function App() {
       setLoading(true);
       setError("");
 
-      const response = await fetch('http://localhost:8000/posts');
+      const response = await fetch('https://mypustak-fullstack-challenge-production.up.railway.app"/posts');
 
       if (!response.ok) {
         throw new Error("Failed fetch posts");
@@ -66,7 +66,7 @@ function App() {
       setSubmitting(true);
       setError("");
 
-      const response = await fetch('http://localhost:8000/posts', {
+      const response = await fetch('https://mypustak-fullstack-challenge-production.up.railway.app"/posts', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -97,7 +97,7 @@ function App() {
     try {
       setError("");
 
-      const response = await fetch(`http://localhost:8000/posts/${id}`, {
+      const response = await fetch(`https://mypustak-fullstack-challenge-production.up.railway.app"/posts/${id}`, {
         method: "DELETE",
       });
 
