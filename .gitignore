@@ -1,17 +1,17 @@
-# Python
+
 backend/venv/
 __pycache__/
 *.pyc
 
-# Node
+
 frontend/node_modules/
 
-# Environment files
+
 .env
 
-# IDE
+
 .vscode/
 .idea/
 
-# OS
+
 .DS_Store
